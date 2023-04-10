@@ -1,0 +1,16 @@
+pre-commit:
+  parallel: true
+  commands:
+    gitleaks:
+      tags: security
+      files: git ls-files -m
+      run: gitleaks detect -v
+      fail_text: You tried to commit forbidden data. Redact and retry
+
+gitleaks-full:
+  commands:
+    gitleaks:
+      tags: security
+      files: git ls-files
+      run: gitleaks detect -v
+      fail_text: You have already committed forbidden data. STOP NOW and REMOVE them.
